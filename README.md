@@ -2,4 +2,4 @@
 
 ## 예상도
 
-<img width="617" alt="Screenshot 2024-05-26 at 11 14 56" src="https://github.com/13byte/aws_3_tier/assets/105263779/db5a3f6f-af01-42cf-8736-44ed16e1de20">
+![aws 3-tier drawio](https://github.com/13byte/aws_3_tier/assets/105263779/ff57b52e-6b8b-44d0-b45a-a6691b0175e8)
