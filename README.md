@@ -2,4 +2,4 @@
 
 **목표**
 
-![aws 3-tier drawio](https://github.com/13byte/aws_3_tier/assets/105263779/ff57b52e-6b8b-44d0-b45a-a6691b0175e8)
+![aws 3-tier drawio](https://github.com/13byte/aws_3_tier/assets/105263779/2b71a1af-386f-4496-9022-5cd6c0478757)
