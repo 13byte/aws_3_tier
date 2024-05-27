@@ -43,3 +43,7 @@ variable "cidr_numeral_private_db" {
     "2" = "192"
   }
 }
+
+variable "domain_name" {
+  description = "regional internal domain name"
+}
