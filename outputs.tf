@@ -60,6 +60,16 @@ output "db_private_subnets" {
 }
 
 # Route53
+output "route53_main_zone_id" {
+  description = "Public Zone ID for VPC"
+  value       = aws_route53_zone.main.zone_id
+}
+
+output "route53_main_domain" {
+  description = "Public Domain Name for VPC"
+  value       = aws_route53_zone.main.name
+}
+
 output "route53_internal_zone_id" {
   description = "Internal Zone ID for VPC"
   value       = aws_route53_zone.internal.zone_id
@@ -68,6 +78,17 @@ output "route53_internal_zone_id" {
 output "route53_internal_domain" {
   description = "Internal Domain Name for VPC"
   value       = aws_route53_zone.internal.name
+}
+
+#S3
+output "origin_s3_id" {
+  description = "cloudfront origin s3 id"
+  value       = aws_s3_bucket.origin_s3.id
+}
+
+output "origin_s3_zone_id" {
+  description = "cloudfront origin s3 zone id"
+  value       = aws_s3_bucket.origin_s3.hosted_zone_id
 }
 
 # Security Group
