@@ -41,6 +41,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2019"
   }
+
+  provider = aws.virginia
 }
 
 resource "aws_cloudfront_origin_access_identity" "s3_distribution" {
