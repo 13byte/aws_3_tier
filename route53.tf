@@ -12,3 +12,39 @@ resource "aws_route53_zone" "internal" {
     vpc_id = aws_vpc.default.id
   }
 }
+
+# acm validation
+resource "aws_route53_record" "cert_validation" {
+  allow_overwrite = true
+  name            = tolist(aws_acm_certificate.main.domain_validation_options)[0].resource_record_name
+  records         = [tolist(aws_acm_certificate.main.domain_validation_options)[0].resource_record_value]
+  type            = tolist(aws_acm_certificate.main.domain_validation_options)[0].resource_record_type
+  ttl             = 60
+  zone_id         = data.aws_route53_zone.main_data.zone_id
+}
+
+# cloudfront cname1 (stop-raining.com)
+resource "aws_route53_record" "cloudfront_cname1" {
+  name    = var.domain_name
+  type    = "A"
+  zone_id = data.aws_route53_zone.main_data.zone_id
+
+  alias {
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+# cloudfront cname2 (www.stop-raining.com)
+resource "aws_route53_record" "cloudfront_cname2" {
+  name    = "www.${var.domain_name}"
+  type    = "A"
+  zone_id = data.aws_route53_zone.main_data.zone_id
+
+  alias {
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
