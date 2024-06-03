@@ -23,7 +23,7 @@ resource "aws_route53_record" "cert_validation" {
   zone_id         = data.aws_route53_zone.main_data.zone_id
 }
 
-# cloudfront cname1 (var.domain_name)
+# cloudfront alias1 (var.domain_name)
 resource "aws_route53_record" "cloudfront_alias1" {
   name    = var.domain_name
   type    = "A"
@@ -36,7 +36,7 @@ resource "aws_route53_record" "cloudfront_alias1" {
   }
 }
 
-# cloudfront cname2 (www.var.domain_name)
+# cloudfront alias2 (www.var.domain_name)
 resource "aws_route53_record" "cloudfront_alias2" {
   name    = "www.${var.domain_name}"
   type    = "A"
