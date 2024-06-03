@@ -15,7 +15,7 @@ resource "aws_s3_bucket_public_access_block" "origin_s3_acl" {
   restrict_public_buckets = true
 }
 
-# OAI for CloudFront
+# OAC for CloudFront
 resource "aws_s3_bucket_policy" "public_get_policy" {
   bucket = aws_s3_bucket.origin_s3.id
   policy = data.aws_iam_policy_document.public_get_policy.json
@@ -23,20 +23,21 @@ resource "aws_s3_bucket_policy" "public_get_policy" {
 
 data "aws_iam_policy_document" "public_get_policy" {
   statement {
-    effect = "Allow"
-
     principals {
-      type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.s3_distribution.iam_arn]
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
     }
 
-    actions = [
-      "s3:GetObject",
-    ]
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values = [
+        aws_cloudfront_distribution.s3_distribution.arn,
+      ]
+    }
 
-    resources = [
-      "${aws_s3_bucket.origin_s3.arn}/*",
-    ]
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.origin_s3.arn}/*"]
   }
 }
 
