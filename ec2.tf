@@ -15,3 +15,29 @@
 #     Name = "was-${var.vpc_name}-${element(var.short_azs, count.index)}"
 #   }
 # }
+
+resource "aws_security_group" "ec2" {
+  name        = "ec2-${var.vpc_name}"
+  description = "ec2 sg for ${var.vpc_name}"
+  vpc_id      = aws_vpc.default.id
+
+  ingress {
+    to_port         = 8080
+    from_port       = 8080
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb.id]
+    description     = "http alb inbound"
+  }
+
+  egress {
+    to_port     = 8080
+    from_port   = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "http outbound"
+  }
+
+  tags = {
+    Name = "ec2-${var.vpc_name}"
+  }
+}
