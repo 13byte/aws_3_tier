@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "public_get_policy" {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
       values = [
-        aws_cloudfront_distribution.s3_distribution.arn,
+        aws_cloudfront_distribution.distribution.arn,
       ]
     }
 
