@@ -47,3 +47,33 @@ variable "cidr_numeral_private_db" {
 variable "domain_name" {
   description = "regional internal domain name"
 }
+
+variable "image_id" {
+  description = "AMI ID for instance"
+  type        = string
+  default     = "ami-0b8414ae0d8d8b4cc"
+}
+
+variable "instance_type" {
+  description = "EC2 Instance type"
+  type        = string
+  default     = "t2.mirco"
+}
+
+variable "min_size" {
+  description = "Auto Scaling min size"
+  type        = number
+  default     = 1
+}
+
+variable "max_size" {
+  description = "Auto Scaling max size"
+  type        = number
+  default     = 1
+}
+
+variable "desired_capacity" {
+  description = "Auto Scaling desired capacity"
+  type        = number
+  default     = 1
+}
