@@ -30,6 +30,10 @@ resource "aws_security_group" "alb" {
     description = "http cloudfront outbound"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name = "alb-${var.vpc_name}"
+  }
 }
 
 resource "aws_lb_target_group" "was_tg" {
