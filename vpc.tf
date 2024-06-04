@@ -85,7 +85,7 @@ resource "aws_subnet" "private_was" {
   cidr_block        = "10.${var.cidr_numeral}.${var.cidr_numeral_private_was[count.index]}.0/20"
   availability_zone = element(var.availability_zones, count.index)
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 
   tags = {
     Name    = "private-was-${var.vpc_name}-${element(var.short_azs, count.index)}"
@@ -119,7 +119,7 @@ resource "aws_subnet" "private_db" {
   cidr_block        = "10.${var.cidr_numeral}.${var.cidr_numeral_private_db[count.index]}.0/20"
   availability_zone = element(var.availability_zones, count.index)
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 
   tags = {
     Name    = "private-db-${var.vpc_name}-${element(var.short_azs, count.index)}"
