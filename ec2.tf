@@ -10,6 +10,8 @@ resource "aws_launch_template" "was" {
     cpu_credits = "standard"
   }
 
+  user_data = filebase64("./settings.sh")
+
   tags = {
     Name = "ec2-template-${var.vpc_name}"
   }

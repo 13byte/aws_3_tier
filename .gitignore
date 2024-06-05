@@ -29,3 +29,5 @@ ansible/updater
 .DS_Store
 
 stop-raining.com
+
+settings.sh
