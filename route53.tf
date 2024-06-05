@@ -5,7 +5,7 @@ data "aws_route53_zone" "main_data" {
 }
 
 resource "aws_route53_zone" "internal" {
-  name    = var.domain_name
+  name    = "${var.domain_name}.internal"
   comment = "${var.vpc_name} - Managed by Terraform"
 
   vpc {
@@ -47,4 +47,13 @@ resource "aws_route53_record" "cloudfront_alias2" {
     zone_id                = aws_cloudfront_distribution.distribution.hosted_zone_id
     evaluate_target_health = false
   }
+}
+
+resource "aws_route53_record" "rds" {
+  name    = "db.${var.domain_name}.internal"
+  type    = "CNAME"
+  zone_id = aws_route53_zone.internal.zone_id
+  ttl     = 300
+
+  records = [aws_db_instance.default.endpoint]
 }
