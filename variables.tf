@@ -48,7 +48,7 @@ variable "domain_name" {
   description = "regional internal domain name"
 }
 
-variable "image_id" {
+variable "aws_linux_image_id" {
   description = "AMI ID for instance"
   type        = string
   default     = "ami-0b8414ae0d8d8b4cc"
