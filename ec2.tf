@@ -1,20 +1,42 @@
-# resource "aws_instance" "was" {
-#   count             = length(var.availability_zones)
-#   ami               = "ami-0b8414ae0d8d8b4cc" # Amazon Linux 2023 AMI
-#   instance_type     = "t2.micro"
-#   availability_zone = element(var.availability_zones, count.index)
-#   subnet_id         = element(aws_subnet.private_was.*.id, count.index)
+resource "aws_launch_template" "was" {
+  name                                 = "ec2-template-${var.vpc_name}"
+  description                          = "launch template for was"
+  instance_type                        = "t2.micro"
+  image_id                             = var.aws_linux_image_id
+  instance_initiated_shutdown_behavior = "terminate"
+  vpc_security_group_ids               = [aws_security_group.ec2.id]
 
-#   root_block_device {
-#     delete_on_termination = true
-#     volume_size           = 10
-#     volume_type           = "gp3"
-#   }
+  credit_specification {
+    cpu_credits = "standard"
+  }
 
-#   tags = {
-#     Name = "was-${var.vpc_name}-${element(var.short_azs, count.index)}"
-#   }
-# }
+  tags = {
+    Name = "ec2-template-${var.vpc_name}"
+  }
+}
+
+resource "aws_autoscaling_group" "default" {
+  name             = "autoscaling-group-${var.vpc_name}"
+  min_size         = var.min_size
+  max_size         = var.min_size
+  desired_capacity = var.desired_capacity
+
+  health_check_grace_period = 300
+  health_check_type         = "ELB"
+  target_group_arns         = [aws_lb_target_group.was_tg.arn]
+
+  force_delete        = true
+  vpc_zone_identifier = [for subnet in aws_subnet.private_was.* : subnet.id]
+
+  timeouts {
+    delete = "5m"
+  }
+
+  launch_template {
+    id      = aws_launch_template.was.id
+    version = aws_launch_template.was.latest_version
+  }
+}
 
 resource "aws_security_group" "ec2" {
   name        = "ec2-${var.vpc_name}"
