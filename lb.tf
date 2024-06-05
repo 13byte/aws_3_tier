@@ -47,9 +47,9 @@ resource "aws_security_group" "alb" {
   }
 
   egress {
-    to_port     = 80
-    from_port   = 80
-    protocol    = "tcp"
+    to_port     = 0
+    from_port   = 0
+    protocol    = "-1"
     description = "http cloudfront outbound"
     cidr_blocks = ["0.0.0.0/0"]
   }
