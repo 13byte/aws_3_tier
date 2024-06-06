@@ -22,12 +22,14 @@
 ## 2. 개발 기간
 
 </br>
+
 **2024/05/27 ~ 2024/06/06**
 </br></br>
 
 ## 3. 실행 방법
 
 </br>
+
 1. terraform.tfvars의 항목에서 domain_name을 원하는것으로 변경한다.
 2. domain_name 이름을 가지는 폴더를 생성해서 빌드한 웹 파일들을 넣는다.
 3. ec2 user data에 들어갈 settings.sh를 만들고 작성한다.
