@@ -30,14 +30,12 @@ resource "aws_autoscaling_group" "default" {
   force_delete        = true
   vpc_zone_identifier = [for subnet in aws_subnet.private_was.* : subnet.id]
 
-  timeouts {
-    delete = "5m"
-  }
-
   launch_template {
     id      = aws_launch_template.was.id
     version = aws_launch_template.was.latest_version
   }
+
+  depends_on = [aws_db_instance.default, aws_route53_record.rds]
 }
 
 resource "aws_security_group" "ec2" {
@@ -54,9 +52,9 @@ resource "aws_security_group" "ec2" {
   }
 
   egress {
-    to_port     = 8080
-    from_port   = 8080
-    protocol    = "tcp"
+    to_port     = 0
+    from_port   = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
     description = "http outbound"
   }
