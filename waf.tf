@@ -57,6 +57,8 @@ resource "aws_wafv2_web_acl" "default" {
     }
   }
 
+  provider = aws.virginia
+
   tags = {
     Name = "default-web-acl-${var.vpc_name}"
   }
