@@ -61,6 +61,8 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   provider = aws.virginia
+
+  web_acl_id = aws_wafv2_web_acl.default.id
 }
 
 # OAC
