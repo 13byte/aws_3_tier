@@ -3,8 +3,11 @@
 ## 목차
 
 [1. 아키텍처](#1-아키텍처)
+
 [2. 개발 기간](#2-개발-기간)
+
 [3. 실행 방법](#3-실행-방법)
+
 [4. 고난과 역경](#4-고난과-역경)
 
 ## 1. 아키텍처
@@ -23,4 +26,4 @@
 4. rds 파일에서 resource "aws_db_instance"에서 password와 db_name(초기 database)을 추가한다.
 5. terraform init -> terraform plan -> terraform apply
 
-## 
+## 4. 고난과 역경
