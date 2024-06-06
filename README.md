@@ -1,4 +1,4 @@
-# AWS 3 tier with Terrafrom
+# AWS 3 Tier with Terrafrom
 
 ## 목차
 
