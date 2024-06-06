@@ -14,7 +14,7 @@ resource "aws_wafv2_web_acl" "default" {
   }
 
   rule {
-    name     = "AWSManagedRulesCommonRuleSet"
+    name     = "AWSManagedRulesCommonRuleSet" # AWS Managed Core Set
     priority = 1
 
     override_action {
@@ -36,7 +36,7 @@ resource "aws_wafv2_web_acl" "default" {
   }
 
   rule {
-    name     = "AWSManagedRulesSQLiRuleSet"
+    name     = "AWSManagedRulesSQLiRuleSet" # AWS Managed SQL Database
     priority = 2
 
     override_action {
