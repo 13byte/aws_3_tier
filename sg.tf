@@ -58,6 +58,32 @@ resource "aws_security_group" "alb" {
   }
 }
 
+resource "aws_security_group" "elasticache-redis" {
+  name        = "elasticache-redis-${var.vpc_name}"
+  description = "elasticache redis sg for ${var.vpc_name}"
+  vpc_id      = aws_vpc.default.id
+
+  ingress {
+    from_port       = 6379
+    to_port         = 6379
+    protocol        = "tcp"
+    security_groups = [aws_security_group.ec2.id]
+    description     = "ec2 inbound"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "outbound"
+  }
+
+  tags = {
+    Name = "elasticache-redis-sg-${var.vpc_name}"
+  }
+}
+
 resource "aws_security_group" "rds" {
   name        = "rds-${var.vpc_name}"
   description = "rds sg for ${var.vpc_name}"
