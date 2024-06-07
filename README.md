@@ -16,7 +16,8 @@
 ## 1. 아키텍처
 
 </br>
-<p align="center"><img src="https://github.com/13byte/aws_3_tier/assets/105263779/0deee9ba-122f-496d-8644-6a7ac329ad95" width="650" height="100%" />
+
+<p align="center"><img src="https://github.com/13byte/aws_3_tier/assets/105263779/33508315-d648-4913-b70f-36d488746aa5" width="650" height="100%" />
 </br></br>
 
 ## 2. 개발 기간
