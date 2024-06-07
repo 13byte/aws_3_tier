@@ -31,30 +31,3 @@ resource "aws_lb_listener" "back_end" {
     target_group_arn = aws_lb_target_group.was_tg.arn
   }
 }
-
-
-resource "aws_security_group" "alb" {
-  name        = "alb-${var.vpc_name}"
-  description = "alb sg for ${var.vpc_name}"
-  vpc_id      = aws_vpc.default.id
-
-  ingress {
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    prefix_list_ids = ["pl-22a6434b"]
-    description     = "http cloudfront inbound"
-  }
-
-  egress {
-    to_port     = 0
-    from_port   = 0
-    protocol    = "-1"
-    description = "http cloudfront outbound"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "alb-${var.vpc_name}"
-  }
-}

@@ -29,30 +29,3 @@ resource "aws_db_subnet_group" "rds" {
     Name = "rds-subnet-group-${var.vpc_name}"
   }
 }
-
-# security group for RDS
-resource "aws_security_group" "rds" {
-  name        = "rds-${var.vpc_name}"
-  description = "rds sg for ${var.vpc_name}"
-  vpc_id      = aws_vpc.default.id
-
-  ingress {
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [aws_security_group.ec2.id]
-    description     = "ec2 inbound"
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "outbound"
-  }
-
-  tags = {
-    Name = "rds-sg-${var.vpc_name}"
-  }
-}
