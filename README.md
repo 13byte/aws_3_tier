@@ -51,7 +51,7 @@
 그래서 어떻게 이 문제를 해결해야 고민을 하다가 null_resource와 provisioner에 대해서 알게 되어 쉽게 해결
 </br></br>
 
-### 2. aws 콘솔상의 acm 검증과 테라폼의 acm 검증의 작동방식 차이
+### 2. aws 콘솔상의 acm 검증과 테라폼의 acm 검증의 차이
 
 </br>
 
