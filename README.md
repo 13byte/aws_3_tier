@@ -16,14 +16,17 @@
 ## 1. 아키텍처
 
 </br>
-<p align="center"><img src="https://github.com/13byte/aws_3_tier/assets/105263779/0deee9ba-122f-496d-8644-6a7ac329ad95" width="650" height="100%" />
+
+<p align="center"><img src="https://github.com/13byte/aws_3_tier/assets/105263779/d97d4d40-0aca-4051-95a2-515a6a49f546" width="650" height="100%" />
 </br></br>
 
 ## 2. 개발 기간
 
 </br>
 
-**2024/05/27 ~ 2024/06/**
+**2024/05/27 ~ 2024/06/07**
+
+로그 및 백업 설정 고도화는 계속 진행 중..
 </br></br>
 
 ## 3. 실행 방법
