@@ -86,6 +86,8 @@ resource "aws_route53_record" "cert_validation" {
 
 ### 3. 공식 문서를 제대로 읽지 않아서 생기는 문제
 
+</br>
+
 모든걸 배포하고 테스트를 하는데, ec2에서 route53에 등록된 db endpoint 주소로 접근을 하는데, 찾을 수 없는 에러가 난다.
 분명 record에 정상 등록이 됐는데 왜 못찾는걸까 vpc의 dns 설정문제인가? subnet에 dns 설정이 상속이 안되서 그런건가? 수많은 생각을 하며 찾았지만
 결국 찾지 못하고 직접 내부 zone을 생성하고 record로 했는데 이때는 또 잘 찾았다. 뭐지 하고 싶어서 terraform으로 생성한것과 콘솔로 생성한것을 비교를 하고 있는데
