@@ -5,7 +5,7 @@ data "aws_route53_zone" "main_data" {
 }
 
 resource "aws_route53_zone" "internal" {
-  name    = "internal.${var.domain_name}"
+  name    = var.internal_domain_name
   comment = "${var.vpc_name} - Managed by Terraform"
 
   vpc {
@@ -50,10 +50,28 @@ resource "aws_route53_record" "cloudfront_alias2" {
 }
 
 resource "aws_route53_record" "rds" {
-  name    = "db.internal.${var.domain_name}"
+  name    = "db.${var.internal_domain_name}"
   type    = "CNAME"
   zone_id = aws_route53_zone.internal.zone_id
   ttl     = 60
 
   records = [aws_db_instance.default.address]
+}
+
+resource "aws_route53_record" "primary_elasticache" {
+  name    = "primary.redis.${var.internal_domain_name}"
+  type    = "CNAME"
+  zone_id = aws_route53_zone.internal.zone_id
+  ttl     = 60
+
+  records = [aws_elasticache_replication_group.redis-group.primary_endpoint_address]
+}
+
+resource "aws_route53_record" "reader_elasticache" {
+  name    = "reader.redis.${var.internal_domain_name}"
+  type    = "CNAME"
+  zone_id = aws_route53_zone.internal.zone_id
+  ttl     = 60
+
+  records = [aws_elasticache_replication_group.redis-group.reader_endpoint_address]
 }
