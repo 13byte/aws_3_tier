@@ -39,8 +39,9 @@
 4. rds 파일에서 resource "aws_db_instance"에서 password와 db_name(초기 database)을 추가한다.
 5. terraform init -> terraform plan -> terraform apply
 
-rds endpoint db.{internal_domain_name}
-elasticache endpoint primary.redis.{internal_domain_name} & reader.redis.{internal_domain_name}
+rds endpoint : db.{internal_domain_name}
+
+elasticache endpoint : primary.redis.{internal_domain_name} & reader.redis.{internal_domain_name}
 </br></br>
 
 ## 4. 고난과 역경
