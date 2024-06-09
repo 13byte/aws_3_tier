@@ -8,5 +8,5 @@ domain_name          = "stop-raining.com"
 internal_domain_name = "stop-raining.internal"
 
 min_size         = 2
-max_size         = 6
+max_size         = 4
 desired_capacity = 2

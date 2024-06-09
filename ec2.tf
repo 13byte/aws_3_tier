@@ -20,7 +20,7 @@ resource "aws_launch_template" "was" {
 resource "aws_autoscaling_group" "default" {
   name             = "autoscaling-group-${var.vpc_name}"
   min_size         = var.min_size
-  max_size         = var.min_size
+  max_size         = var.max_size
   desired_capacity = var.desired_capacity
 
   health_check_grace_period = 300
@@ -36,4 +36,18 @@ resource "aws_autoscaling_group" "default" {
   }
 
   depends_on = [aws_db_instance.default, aws_route53_record.rds]
+}
+
+resource "aws_autoscaling_policy" "scale_out" {
+  name                   = "scale-out-${var.vpc_name}"
+  policy_type            = "TargetTrackingScaling"
+  adjustment_type        = "ChangeInCapacity"
+  autoscaling_group_name = aws_autoscaling_group.default.name
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 50
+  }
 }
