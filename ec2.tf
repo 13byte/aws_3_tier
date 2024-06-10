@@ -27,6 +27,11 @@ resource "aws_autoscaling_group" "default" {
   health_check_type         = "ELB"
   target_group_arns         = [aws_lb_target_group.was_tg.arn]
 
+  instance_maintenance_policy {
+    min_healthy_percentage = 90
+    max_healthy_percentage = 120
+  }
+
   force_delete        = true
   vpc_zone_identifier = [for subnet in aws_subnet.private_was.* : subnet.id]
 
@@ -38,8 +43,8 @@ resource "aws_autoscaling_group" "default" {
   depends_on = [aws_db_instance.default, aws_route53_record.rds]
 }
 
-resource "aws_autoscaling_policy" "scale_out" {
-  name                   = "scale-out-${var.vpc_name}"
+resource "aws_autoscaling_policy" "scale_inout" {
+  name                   = "scale-inout-${var.vpc_name}"
   policy_type            = "TargetTrackingScaling"
   adjustment_type        = "ChangeInCapacity"
   autoscaling_group_name = aws_autoscaling_group.default.name
