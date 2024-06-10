@@ -38,11 +38,11 @@ resource "aws_security_group" "alb" {
   vpc_id      = aws_vpc.default.id
 
   ingress {
-    from_port       = 80
-    to_port         = 80
+    from_port       = 443
+    to_port         = 443
     protocol        = "tcp"
     prefix_list_ids = ["pl-22a6434b"]
-    description     = "http cloudfront inbound"
+    description     = "https cloudfront inbound"
   }
 
   egress {
