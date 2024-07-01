@@ -61,7 +61,7 @@ variable "aws_linux_image_id" {
 variable "instance_type" {
   description = "EC2 Instance type"
   type        = string
-  default     = "t2.mirco"
+  default     = "t2.micro"
 }
 
 variable "min_size" {
