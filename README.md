@@ -19,7 +19,7 @@
 
 </br>
 
-<p align="center"><img src="https://github.com/13byte/aws_3_tier/assets/105263779/34c9ba7c-b310-45aa-90d2-8057c00fa0d5" width="650" height="100%" />
+<p align="center"><img src="https://github.com/13byte/aws_3_tier/assets/105263779/fe9d84ad-d7ae-446f-ab47-b55872d25685" width="650" height="100%" />
 </br></br>
 
 ## 2. 개발 기간
